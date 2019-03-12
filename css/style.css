@@ -14,7 +14,7 @@ body {
   width: 295px;
   margin: 0 10px 10px 0;
 }
-.cal-display-container .cal-display {
+.cal-display-container #cal-display {
   height: 55px;
 }
 
