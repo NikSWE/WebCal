@@ -1,0 +1,23 @@
+.wrapper {
+  width: 320px;
+}
+
+.cal-display-container {
+  width: 295px;
+  margin: 10px 10px;
+}
+.cal-display-container .cal-display {
+  height: 55px;
+}
+
+.form-control:disabled {
+  background-color: #fff;
+}
+
+.btn {
+  width: 60px;
+  height: 60px;
+  margin: 10px 10px;
+}
+
+/*# sourceMappingURL=style.css.map */
