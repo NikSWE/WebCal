@@ -1,108 +1,113 @@
 body {
-    background: #c9d6ff; //Added background color to body
+  background: #c9d6ff; //Added background color to body
 }
 
 .wrapper {
-    width: 320px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-52%) translateY(-52%);
-    background: #333a56; //changed color of wrapper
-    box-shadow: 3px 4px 25px 0px rgba(0, 0, 0, 1); //added shadow to wrapper
-    border-radius: 15px; //changed shape from rectangular to circular
+  width: 320px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-51%) translateY(-50%);
+  background: #333a56; //changed color of wrapper
+  box-shadow: 3px 4px 25px 0px rgba(0, 0, 0, 1); //added shadow to wrapper
+  border-radius: 15px; //changed shape from rectangular to circular
+
+  .inner-wrapper {
+    width: 95%;
+    position: relative;
+    left: 4px;
+  }
 }
 
 .cal-display-container {
-    width: 295px;
-    margin: 0 10px 10px 0;
+  width: 100%;
+  margin: 0 10px 10px 4px;
 
-    #cal-display {
-        height: 55px;
-        border-radius: 10px;
-        margin-top: 10px; //Added margin at top of "Project Calculator"
-        font-family: Roboto; //Changed font of "Project Calculator" to Roboto
-    }
+  #cal-display {
+    height: 55px;
+    border-radius: 10px;
+    margin-top: 10px; //Added margin at top of "Project Calculator"
+    font-family: Roboto; //Changed font of "Project Calculator" to Roboto
+  }
 }
 
 .form-control:disabled {
-    background-color: #feffff; //changed background color of "Project Calculator"
+  background-color: #feffff; //changed background color of "Project Calculator"
 }
 
 .btn {
-    width: 60px;
-    height: 60px;
-    margin: 10px 0px;
+  width: 60px;
+  height: 60px;
+  margin: 10px 0px;
 }
 
 //Changed background color of arithmetic operation symbols and added shadow
 .btn-dark {
-    background-color: #52658f;
-    border: solid 1px rgba(0, 0, 0, 0.5);
+  background-color: #52658f;
+  border: solid 1px rgba(0, 0, 0, 0.5);
 
-    &:focus {
-        background-color: #343a40;
-    }
+  &:focus {
+    background-color: #343a40;
+  }
 }
 
 //Changed background color of numbers and added shadow
 .btn-primary {
-    background-color: #5d5893;
-    border: solid 1px rgba(0, 0, 0, 0.5);
+  background-color: #5d5893;
+  border: solid 1px rgba(0, 0, 0, 0.5);
 
-    &:hover {
-        background-color: #007bff;
-    }
+  &:hover {
+    background-color: #007bff;
+  }
 
-    &:focus {
-        background-color: #007bff;
-    }
+  &:focus {
+    background-color: #007bff;
+  }
 }
 
 //Changed background color of two bottom row buttons and added shadow
 .btn-info {
-    background-color: #8698c5;
-    border: solid 1px rgba(0, 0, 0, 0.5);
+  background-color: #8698c5;
+  border: solid 1px rgba(0, 0, 0, 0.5);
 
-    &:focus {
-        background-color: #17a2b8;
-    }
+  &:focus {
+    background-color: #17a2b8;
+  }
 }
 
 //Changed background color of "=" sign and added shadow
 .btn-success {
-    background-color: #717788;
-    border: solid 1px rgba(0, 0, 0, 0.5);
+  background-color: #717788;
+  border: solid 1px rgba(0, 0, 0, 0.5);
 
-    &:focus {
-        background-color: #28a745;
-    }
+  &:focus {
+    background-color: #28a745;
+  }
 }
 
 //Changed background color of "AC" button and added shadow
 .btn-danger {
-    background-color: #e14658;
-    border: solid 1px rgba(0, 0, 0, 0.5);
-    color: black;
+  background-color: #e14658;
+  border: solid 1px rgba(0, 0, 0, 0.5);
+  color: black;
 
-    &:focus {
-        background-color: #dc3545;
-        color: #fff;
-    }
+  &:focus {
+    background-color: #dc3545;
+    color: #fff;
+  }
 }
 
 //Changed background color of "DEL" button and added shadow
 .btn-warning {
-    background-color: #f77496;
-    border: solid 1px rgba(0, 0, 0, 0.5);
+  background-color: #f77496;
+  border: solid 1px rgba(0, 0, 0, 0.5);
 
-    &:hover {
-        color: #fff;
-    }
+  &:hover {
+    color: #fff;
+  }
 
-    &:focus {
-        color: #fff;
-        background-color: #ffc107;
-    }
-
+  &:focus {
+    color: #fff;
+    background-color: #ffc107;
+  }
 }

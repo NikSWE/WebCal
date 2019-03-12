@@ -7,15 +7,20 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translateX(-52%) translateY(-52%);
+  transform: translateX(-51%) translateY(-50%);
   background: #333a56;
   box-shadow: 3px 4px 25px 0px black;
   border-radius: 15px;
 }
+.wrapper .inner-wrapper {
+  width: 95%;
+  position: relative;
+  left: 4px;
+}
 
 .cal-display-container {
-  width: 295px;
-  margin: 0 10px 10px 0;
+  width: 100%;
+  margin: 0 10px 10px 4px;
 }
 .cal-display-container #cal-display {
   height: 55px;
