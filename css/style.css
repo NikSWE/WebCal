@@ -1,10 +1,18 @@
+body {
+  background-color: #8E2DE2;
+}
+
 .wrapper {
   width: 320px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-52%) translateY(-52%);
 }
 
 .cal-display-container {
   width: 295px;
-  margin: 10px 10px;
+  margin: 0 10px 10px 0;
 }
 .cal-display-container .cal-display {
   height: 55px;
@@ -17,7 +25,7 @@
 .btn {
   width: 60px;
   height: 60px;
-  margin: 10px 10px;
+  margin: 10px 0px;
 }
 
 /*# sourceMappingURL=style.css.map */
