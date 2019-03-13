@@ -1,4 +1,5 @@
 $( document ).ready( function () {
+  $('.wrapper').hide();
   // array which contains user's expression
   let userExpression = [];
 
@@ -65,11 +66,6 @@ $( document ).ready( function () {
     $( '#cal-display' ).val( value );
   };
 
-  // get the calculator display
-  let getCalDisplay = function () {
-    return $( '#cal-display' ).val();
-  };
-
   // update the value on calculator
   let updateCalDisplay = function () {
     if ( isOperator( operatorList, userExpression[ userExpression.length - 1 ] ) ) {
@@ -118,6 +114,8 @@ $( document ).ready( function () {
   $( "button" ).click( function () {
     // obtain the value of the btn
     let value = $( this ).val();
+
+    // play btnSound on click
     btnSound.play();
 
     if ( value === "AC" ) {
