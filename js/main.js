@@ -75,15 +75,14 @@ $( document ).ready( function () {
 
   // evaluate userExpression
   let evaluate = function ( array ) {
-    let operand1, operand2, operator, result;
-    for ( let i = 0; i < array.length; i = i + 3 ) {
+    let operand1, operand2, operator, result, i = 0;
+    while ( array.length != 1 ) {
       operand1 = array[ i ];
       operator = array[ i + 1 ];
-      if ( operator === "+/-" ) {
-        operand2 = "-1";
-      } else {
-        operand2 = array[ i + 2 ];
-      }
+      operand2 = array[ i + 2 ];
+
+      // check operator
+      // call the corresponding function
       switch ( operator ) {
         case "+":
           result = add( operand1, operand2 );
@@ -100,16 +99,13 @@ $( document ).ready( function () {
         case "%":
           result = modulo( operand1, operand2 );
           break;
-        case "+/-":
-          result = multiply( operand1, operand2 );
-          break;
         default:
           break;
       }
       array.splice( i, 3, result );
       console.log( i );
     }
-    return array;
+    return array[ 0 ];
   };
 
   // button listener
@@ -122,10 +118,10 @@ $( document ).ready( function () {
       userExpression = [];
       setCalDisplay( $( '#cal-display' ).attr( 'placeholder' ) );
     } else if ( value === "DEL" ) {
-      // check if userExpression array isEmpty
+      // check if userExpression array is empty
       // if yes print error on display
       if ( userExpression === undefined || userExpression.length == 0 ) {
-        setCalDisplay( 'Error' );
+        setCalDisplay( 'Error :( Nothing to eat' );
       }
       // else if check if value at
       // last index is an operator
@@ -151,13 +147,24 @@ $( document ).ready( function () {
       }
     } else if ( value === "=" ) {
       // evaluate the userExpression array
-      userExpression = evaluate( userExpression );
+      // if userExpression is empty
+      if ( userExpression === undefined || userExpression.length == 0 ) {
+        setCalDisplay( 'Error :( Feed me Numbers' );
+      } else if ( userExpression.length == 1 ) {
+        setCalDisplay( userExpression[ 0 ] );
+        userExpression = [];
+      } else {
+        setCalDisplay( evaluate( userExpression ) );
+        userExpression = [];
+      }
     } else if ( userExpression === undefined || userExpression.length == 0 ) {
       // array empty or does not exist
       // check if value is an operator
       // if yes print error on display
       if ( isOperator( operatorList, value ) ) {
-        setCalDisplay( 'Error' );
+        setCalDisplay( 'Error :( Binary operator genius!' );
+        console.log( 'in this section' );
+
       }
       // else push the value into the array
       else {
@@ -165,9 +172,31 @@ $( document ).ready( function () {
       }
     } else if ( isOperator( operatorList, value ) ) {
       // check if value of the btn
-      // is an operator if 'yes'
-      // push into the array
-      userExpression.push( value );
+      // check if the value is '+/-'
+      // if yes solve the value
+      if ( value === '+/-' ) {
+        // check if last value is an operator if 'yes'
+        // pop that value and operate on next value
+        if ( isOperator( operatorList, userExpression[ userExpression.length - 1 ] ) ) {
+          userExpression.pop();
+          userExpression.push( multiply( userExpression.pop(), '-1' ) );
+        }
+        // else operate on second last value 
+        else {
+          userExpression.push( multiply( userExpression.pop(), '-1' ) );
+        }
+      }
+      // check last value in array
+      // if the value is operator
+      // change the operator
+      else if ( isOperator( operatorList, userExpression[ userExpression.length - 1 ] ) ) {
+        userExpression.pop();
+        userExpression.push( value );
+      }
+      // else push into the array
+      else {
+        userExpression.push( value );
+      }
     } else {
       // check value at last index of userExpression array
       // if it is an operator then push the value
@@ -183,6 +212,8 @@ $( document ).ready( function () {
       }
     }
     console.log( userExpression );
+
     updateCalDisplay();
+
   } );
 } );
