@@ -1,5 +1,4 @@
 $( document ).ready( function () {
-  $('.wrapper').hide();
   // array which contains user's expression
   let userExpression = [];
 
