@@ -93,6 +93,8 @@ $( document ).ready( function () {
                     userExpression.splice( userExpression.length - 1, 1, temp );
                 }
             }
+        } else if ( value === '=' ) {
+            console.log( '= btn pressed' );
         } else if ( userExpression === undefined || userExpression.length == 0 ) {
             // array empty or does not exist
             // check if value is an operator
