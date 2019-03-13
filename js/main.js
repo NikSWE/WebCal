@@ -1,19 +1,10 @@
 $( document ).ready( function () {
-  // creating an audio context
-  let context = new AudioContext();
-
   // array which contains user's expression
   let userExpression = [];
 
   // array which contains all the valid operators
   // performed by the calculator
   let operatorList = [ "+", "-", "*", "/", "%", "+/-" ];
-
-  // created button sound
-  let btnSound = new Howl( {
-    src: [ '/public/audio/btnSound.mp3' ],
-    volume: 1
-  } );
 
   // calculate sum of operands
   let add = function ( a, b ) {
@@ -53,9 +44,9 @@ $( document ).ready( function () {
   // check if value is an operator
   // if an operator return true
   // else return false
-  let isOperator = function ( array, value ) {
+  let isOperator = function ( value ) {
     let flag = false;
-    array.forEach( function ( operator ) {
+    operatorList.forEach( function ( operator ) {
       if ( value === operator ) {
         flag = true;
       }
@@ -70,7 +61,7 @@ $( document ).ready( function () {
 
   // update the value on calculator
   let updateCalDisplay = function () {
-    if ( isOperator( operatorList, userExpression[ userExpression.length - 1 ] ) ) {
+    if ( isOperator( userExpression[ userExpression.length - 1 ] ) ) {
       setCalDisplay( userExpression[ userExpression.length - 2 ] );
     } else {
       setCalDisplay( userExpression[ userExpression.length - 1 ] );
@@ -79,11 +70,11 @@ $( document ).ready( function () {
 
   // evaluate userExpression
   let evaluate = function ( array ) {
-    let operand1, operand2, operator, result, i = 0;
+    let operand1, operand2, operator, result;
     while ( array.length != 1 ) {
-      operand1 = array[ i ];
-      operator = array[ i + 1 ];
-      operand2 = array[ i + 2 ];
+      operand1 = array[ 0 ];
+      operator = array[ 1 ];
+      operand2 = array[ 2 ];
 
       // check operator
       // call the corresponding function
@@ -106,8 +97,7 @@ $( document ).ready( function () {
         default:
           break;
       }
-      array.splice( i, 3, result );
-      console.log( i );
+      array.splice( 0, 3, result );
     }
     return array[ 0 ];
   };
@@ -117,35 +107,44 @@ $( document ).ready( function () {
     // obtain the value of the btn
     let value = $( this ).val();
 
+    // // creating an audio context
+    // let context = new AudioContext();
+
+    // created button sound
+    let btnSound = new Howl( {
+      src: [ '/public/audio/btnSound.mp3' ],
+      volume: 1
+    } );
+
     // play btnSound on click
-    context.resume().then( () => {
-      btnSound.play();
-    } )
+    // context.resume().then( () => {
+    btnSound.play();
+    // } );
 
-
+    // check if 'AC' is pressed
+    // clear the userExpression array
     if ( value === "AC" ) {
-      // clear the userExpression array
       userExpression = [];
       setCalDisplay( $( '#cal-display' ).attr( 'placeholder' ) );
-    } else if ( value === "DEL" ) {
+    }
+    // check if 'DEL' is pressed
+    else if ( value === "DEL" ) {
       // check if userExpression array is empty
-      // if yes print error on display
       if ( userExpression === undefined || userExpression.length == 0 ) {
+        // if yes print error on display
         setCalDisplay( 'Error :( Nothing to eat' );
       }
-      // else if check if value at
-      // last index is an operator
-      // if yes pop the value
-      else if ( isOperator( operatorList, userExpression[ userExpression.length - 1 ] ) ) {
+      // check if value at last index is an operator
+      else if ( isOperator( userExpression[ userExpression.length - 1 ] ) ) {
+        // if yes pop the value
         userExpression.pop();
-      }
-      // else delete the last input
-      else {
+      } else {
+        // else delete the last input
         let temp = userExpression[ userExpression.length - 1 ];
-        // check if the length of temp
-        // is equal to 1 if yes then
-        // pop the last value from userExpression
+
+        // check if length of temp is equal to 1 
         if ( temp.length == 1 ) {
+          // if yes then pop from userExpression
           userExpression.pop();
         }
         // else slice the last value from temp
@@ -155,43 +154,48 @@ $( document ).ready( function () {
           userExpression.splice( userExpression.length - 1, 1, temp );
         }
       }
-    } else if ( value === "=" ) {
+    }
+    // check if '=' is pressed
+    else if ( value === "=" ) {
       // evaluate the userExpression array
       // if userExpression is empty
       if ( userExpression === undefined || userExpression.length == 0 ) {
         setCalDisplay( 'Error :( Feed me Numbers' );
-      } else if ( userExpression.length == 1 ) {
+      }
+      // if userExpression contains 1 element
+      else if ( userExpression.length == 1 ) {
         setCalDisplay( userExpression[ 0 ] );
         userExpression = [];
       } else {
         setCalDisplay( evaluate( userExpression ) );
         userExpression = [];
       }
-    } else if ( userExpression === undefined || userExpression.length == 0 ) {
-      // array empty or does not exist
+    }
+    // check if someother btn is pressed
+    // userExpression is empty or does not exist
+    else if ( userExpression === undefined || userExpression.length == 0 ) {
       // check if value is an operator
-      // if yes print error on display
-      if ( isOperator( operatorList, value ) ) {
+      if ( isOperator( value ) ) {
+        // if yes print error on display
         setCalDisplay( 'Error :( Binary operator genius!' );
-        console.log( 'in this section' );
-
       }
       // else push the value into the array
       else {
         userExpression.push( value );
       }
-    } else if ( isOperator( operatorList, value ) ) {
-      // check if value of the btn
+    }
+    // check if operator btn is pressed
+    else if ( isOperator( value ) ) {
       // check if the value is '+/-'
-      // if yes solve the value
       if ( value === '+/-' ) {
+        // if yes solve the value and then push the updated value
         // check if last value is an operator if 'yes'
         // pop that value and operate on next value
-        if ( isOperator( operatorList, userExpression[ userExpression.length - 1 ] ) ) {
+        if ( isOperator( userExpression[ userExpression.length - 1 ] ) ) {
           userExpression.pop();
           userExpression.push( multiply( userExpression.pop(), '-1' ) );
         }
-        // else operate on second last value 
+        // else operate on last value 
         else {
           userExpression.push( multiply( userExpression.pop(), '-1' ) );
         }
@@ -199,7 +203,7 @@ $( document ).ready( function () {
       // check last value in array
       // if the value is operator
       // change the operator
-      else if ( isOperator( operatorList, userExpression[ userExpression.length - 1 ] ) ) {
+      else if ( isOperator( userExpression[ userExpression.length - 1 ] ) ) {
         userExpression.pop();
         userExpression.push( value );
       }
@@ -207,20 +211,20 @@ $( document ).ready( function () {
       else {
         userExpression.push( value );
       }
-    } else {
+    }
+    // value pressed must be a number
+    else {
       // check value at last index of userExpression array
       // if it is an operator then push the value
-      if ( isOperator( operatorList, userExpression[ userExpression.length - 1 ] ) ) {
+      if ( isOperator( userExpression[ userExpression.length - 1 ] ) ) {
         userExpression.push( value );
       }
-      // else pop prev value and concat
-      // with new value push it back afterwards
+      // else pop prev value and concat with new value push it back afterwards
       else {
         let temp = userExpression.pop();
         temp += value;
         userExpression.push( temp );
       }
-      updateCalDisplay();
     }
     console.log( userExpression );
   } );
