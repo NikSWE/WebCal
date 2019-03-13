@@ -1,4 +1,7 @@
 $( document ).ready( function () {
+  // creating an audio context
+  let context = new AudioContext();
+
   // array which contains user's expression
   let userExpression = [];
 
@@ -8,7 +11,7 @@ $( document ).ready( function () {
 
   // created button sound
   let btnSound = new Howl( {
-    src: [ '../audio/btnSound.mp3' ],
+    src: [ '/public/audio/btnSound.mp3' ],
     volume: 1
   } );
 
@@ -115,7 +118,10 @@ $( document ).ready( function () {
     let value = $( this ).val();
 
     // play btnSound on click
-    btnSound.play();
+    context.resume().then( () => {
+      btnSound.play();
+    } )
+
 
     if ( value === "AC" ) {
       // clear the userExpression array
@@ -214,10 +220,8 @@ $( document ).ready( function () {
         temp += value;
         userExpression.push( temp );
       }
+      updateCalDisplay();
     }
     console.log( userExpression );
-
-    updateCalDisplay();
-
   } );
 } );
