@@ -6,6 +6,12 @@ $( document ).ready( function () {
   // performed by the calculator
   let operatorList = [ "+", "-", "*", "/", "%", "+/-" ];
 
+  // created button sound
+  let btnSound = new Howl( {
+    src: [ '../audio/btnSound.mp3' ],
+    volume: 1
+  } );
+
   // calculate sum of operands
   let add = function ( a, b ) {
     a = Number( a );
@@ -112,6 +118,7 @@ $( document ).ready( function () {
   $( "button" ).click( function () {
     // obtain the value of the btn
     let value = $( this ).val();
+    btnSound.play();
 
     if ( value === "AC" ) {
       // clear the userExpression array
