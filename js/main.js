@@ -1,4 +1,11 @@
 $( document ).ready( function () {
+  // array which contains user's expression
+  let userExpression = [];
+
+  // array which contains all the valid operators
+  // performed by the calculator
+  let operatorList = [ "+", "-", "*", "/", "%", "+/-" ];
+
   // calculate sum of operands
   let add = function ( a, b ) {
     a = Number( a );
@@ -34,14 +41,6 @@ $( document ).ready( function () {
     return `${a % b}`;
   };
 
-  // array which contains user's expression
-  let userExpression = [];
-  console.log( userExpression );
-
-  // array which contains all the valid operators
-  // performed by the calculator
-  let operatorList = [ "+", "-", "*", "/", "%", "+/-" ];
-
   // check if value is an operator
   // if an operator return true
   // else return false
@@ -64,6 +63,15 @@ $( document ).ready( function () {
   let getCalDisplay = function () {
     return $( '#cal-display' ).val();
   };
+
+  // update the value on calculator
+  let updateCalDisplay = function () {
+    if ( isOperator( operatorList, userExpression[ userExpression.length - 1 ] ) ) {
+      setCalDisplay( userExpression[ userExpression.length - 2 ] );
+    } else {
+      setCalDisplay( userExpression[ userExpression.length - 1 ] );
+    }
+  }
 
   // evaluate userExpression
   let evaluate = function ( array ) {
@@ -175,5 +183,6 @@ $( document ).ready( function () {
       }
     }
     console.log( userExpression );
+    updateCalDisplay();
   } );
 } );
