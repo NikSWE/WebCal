@@ -118,7 +118,7 @@ $( document ).ready( function () {
 
     // play btnSound on click
     // context.resume().then( () => {
-    btnSound.play();
+    // btnSound.play();
     // } );
 
     // check if 'AC' is pressed
@@ -146,12 +146,14 @@ $( document ).ready( function () {
         if ( temp.length == 1 ) {
           // if yes then pop from userExpression
           userExpression.pop();
+          setCalDisplay( '0' );
         }
         // else slice the last value from temp
         // and push it back in userExpression
         else {
           temp = temp.slice( 0, -1 );
           userExpression.splice( userExpression.length - 1, 1, temp );
+          updateCalDisplay();
         }
       }
     }
@@ -182,6 +184,7 @@ $( document ).ready( function () {
       // else push the value into the array
       else {
         userExpression.push( value );
+        updateCalDisplay();
       }
     }
     // check if operator btn is pressed
@@ -199,6 +202,7 @@ $( document ).ready( function () {
         else {
           userExpression.push( multiply( userExpression.pop(), '-1' ) );
         }
+        updateCalDisplay();
       }
       // check last value in array
       // if the value is operator
@@ -225,6 +229,7 @@ $( document ).ready( function () {
         temp += value;
         userExpression.push( temp );
       }
+      updateCalDisplay();
     }
     console.log( userExpression );
   } );
