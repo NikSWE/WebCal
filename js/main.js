@@ -1,4 +1,16 @@
 $( document ).ready( function () {
+
+  // makes sure the whole site is loaded 
+  $( window ).on( 'load', function () {
+    // will fade the pacman
+    $( '.pacman' ).delay( 600 ).fadeOut();
+    // will fade the preloader background
+    $( '.preloader-wrapper' ).delay( 1000 ).fadeOut( 'slow' );
+    $( 'body' ).delay( 1000 ).css( {
+      'overflow': 'visible'
+    } );
+  } )
+
   // array which contains user's expression
   let userExpression = [];
 
