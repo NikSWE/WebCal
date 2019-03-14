@@ -243,6 +243,5 @@ $( document ).ready( function () {
       }
       updateCalDisplay();
     }
-    console.log( userExpression );
   } );
 } );
