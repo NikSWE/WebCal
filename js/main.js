@@ -1,5 +1,4 @@
 $( document ).ready( function () {
-
   // makes sure the whole site is loaded 
   $( window ).on( 'load', function () {
     // will fade the pacman
@@ -118,20 +117,6 @@ $( document ).ready( function () {
   $( "button" ).click( function () {
     // obtain the value of the btn
     let value = $( this ).val();
-
-    // // creating an audio context
-    // let context = new AudioContext();
-
-    // created button sound
-    let btnSound = new Howl( {
-      src: [ '/public/audio/btnSound.mp3' ],
-      volume: 1
-    } );
-
-    // play btnSound on click
-    // context.resume().then( () => {
-    // btnSound.play();
-    // } );
 
     // check if 'AC' is pressed
     // clear the userExpression array
